@@ -1,54 +1,26 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import styled from 'styled-components'
 
-const DivFiltros = styled.div `
-  border: 1px black solid;
-  margin: 30px;
-  padding-left: 10px;
-  padding-bottom: 90vh;
-  
-`
-const FormFiltros = styled.form `
-  display: flex;
-  flex-direction: column;
-`
-
-const LabelFiltros = styled.label `
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 10px;
-`
-
-export default class App extends React.Component { 
-
-  render() {
-    return <DivFiltros>
-      
-      <h3>Filtros</h3>
-      
-      <FormFiltros>
-        <LabelFiltros>
-        Valor Mínimo:
-          <input type="number" name="valor-minimo" />
-        </LabelFiltros>
-      
-        <LabelFiltros>
-          Valor Máximo:
-          <input type="number" name="valor-maximo" />
-        </LabelFiltros>
-        
-        <LabelFiltros>
-          Buscar por Nome:
-          <input type="text" name="busca-por-nome" />
-        </LabelFiltros>
-      </FormFiltros>
-    
-    
-  </DivFiltros>
-    }
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
 }
 
-
+export default App;
