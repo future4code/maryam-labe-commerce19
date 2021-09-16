@@ -71,6 +71,26 @@ const cards = [
   },
 ]
 
+
+const DivFiltros = styled.div `
+  border: 1px black solid;
+  margin: 30px;
+  padding-left: 10px;
+  padding-bottom: 90vh;
+  
+`
+const FormFiltros = styled.form `
+  display: flex;
+  flex-direction: column;
+`
+
+const LabelFiltros = styled.label `
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    `
+
 const App = () => {
 
  
@@ -78,7 +98,29 @@ const App = () => {
   return (
     <EstilizacaoPagina>
       <EstilizacaoFiltros>
-        <p>Filtros</p>
+        <DivFiltros>
+      
+          <h3>Filtros</h3>
+      
+          <FormFiltros>
+            <LabelFiltros>
+               Valor Mínimo:
+              <input type="number" name="valor-minimo" />
+            </LabelFiltros>
+      
+            <LabelFiltros>
+              Valor Máximo:
+              <input type="number" name="valor-maximo" />
+            </LabelFiltros>
+        
+            <LabelFiltros>
+             Buscar por Nome:
+             <input type="text" name="busca-por-nome" />
+           </LabelFiltros>
+         </FormFiltros>
+    
+    
+         </DivFiltros>
       </EstilizacaoFiltros>
       <EstilizandoHome>
         <EstilizandoTopo>
