@@ -2,6 +2,8 @@ import React from 'react';
 
 import Cards from './components/Cards';
 
+import Carrinho from './components/Carrinho/Carrinho';
+
 import styled from 'styled-components'
 
 import Sputnik from './components/imgs/sputnik.jpg'
@@ -13,7 +15,6 @@ const EstilizacaoPagina = styled.div`
   display: grid;
   grid-template-columns: 300px 1fr 300px;
   grid-template-rows: 1fr;
-
 `
 
 const EstilizacaoFiltros = styled.div`
@@ -170,7 +171,7 @@ class App extends React.Component {
       {/* {CARRINHO} */}
 
       <EstilizandoCarrinho>
-        <p>Carrinho</p>
+        <Carrinho></Carrinho>
       </EstilizandoCarrinho>
     </EstilizacaoPagina>
   );
