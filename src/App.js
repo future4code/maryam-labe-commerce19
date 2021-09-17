@@ -2,12 +2,20 @@ import React from 'react';
 
 import Cards from './components/Cards';
 
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 import Sputnik from './components/imgs/sputnik.jpg'
 import Vostok1 from './components/imgs/vostok1.jpg'
 import Explorer1 from './components/imgs/explorer1.jpg'
 import Luna10 from './components/imgs/luna10.jpg'
+
+const GlobalStyle = createGlobalStyle`
+ *{
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+ }
+`
 
 const EstilizacaoPagina = styled.div`
  display: grid;
@@ -22,28 +30,33 @@ const EstilizacaoFiltros = styled.div`
 const EstilizandoCarrinho = styled.div`
 /* border: 1px solid blue; */
 `
+
+// HOME ESTILIZAÇÃO
 const EstilizandoHome = styled.section`
-width: 100vh;
+/* border: 1px solid black; */
+/* width: 100vh; */
 display:grid;
 grid-template-rows: 60px 1fr;
 `
 
 const EstilizandoProdutos = styled.div`
-
+justify-items: center;
 display: grid;
 grid-template-columns: 1fr 1fr;
 grid-template-rows: 1fr 1fr;
 gap: 10px;
 `
 const EstilizandoTopo = styled.div`
+width: 100%;
 border: 1px solid black;
 display: flex;
 justify-content: space-between;
 align-items: center;
 padding-left: 10px;
 padding-right: 10px;
+margin-top: 30px;
 `
-
+//HOME ESTILIZAÇÃO
 const cards = [
   {
       id: 1,
@@ -97,6 +110,8 @@ class App extends React.Component {
 
   return (
     <EstilizacaoPagina>
+      <GlobalStyle/>
+
 
      {/* {Filtros} */}
       <EstilizacaoFiltros>
@@ -117,7 +132,7 @@ class App extends React.Component {
             <LabelFiltros>
              Buscar por Nome:
              <input type="text" name="busca-por-nome" />
-           </LabelFiltros>
+            </LabelFiltros>
 
           </FormFiltros>
          </DivFiltros>
@@ -148,6 +163,9 @@ class App extends React.Component {
       <EstilizandoCarrinho>
         <p>Carrinho</p>
       </EstilizandoCarrinho>
+
+
+
     </EstilizacaoPagina>
   );
   };
