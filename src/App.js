@@ -15,10 +15,10 @@ import Luna10 from './components/imgs/luna10.jpg'
 
 const GlobalStyle = createGlobalStyle`
  *{
-   padding: 0;
-   margin: 0;
-   box-sizing: border-box;
- }
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 `
 
 const EstilizacaoPagina = styled.div`
@@ -113,7 +113,8 @@ class App extends React.Component {
     filtroValorMaximo: 500,
     filtroBuscaNome: "",
     sortingParameter: "preco",
-    ordem:1
+    ordem:1,
+    produtosSelecionados: []
   }
 
   onChangeMinimo = (event) => {
