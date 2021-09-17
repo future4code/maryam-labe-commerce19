@@ -111,7 +111,9 @@ class App extends React.Component {
   state = {
     filtroValorMinimo: 0,
     filtroValorMaximo: 500,
-    filtroBuscaNome: ""  
+    filtroBuscaNome: "",
+    sortingParameter: "preco",
+    ordem:1
   }
 
   onChangeMinimo = (event) => {
@@ -123,7 +125,20 @@ class App extends React.Component {
   onChangeNome = (event) => {
     this.setState({filtroBuscaNome: event.target.value})
   }
+  
+  updatesortingParameter =(event) => {
+    this.setState({
+      sortingParameter: event.target.value
+    }
+    )
+  }
 
+  updateOrdem =(event) => {
+    this.setState({
+      ordem: event.target.value
+    }
+    )
+  }
   render() {
 
 
@@ -173,18 +188,39 @@ class App extends React.Component {
         <EstilizandoTopo>
           
           <p>Quantidade:{cards.length}</p>
-          <label>
-            Ordenação:
-            <select>
-              <option value="CRESCENTE">Crescente</option>
-              <option value="DECRESCENTE">Decrescente</option>
+          <span>
+            <label for="sort">Ordenação: </label>
+            <select
+              name="sort"
+              value={this.state.sortingParameter}
+              onchange={this.updatesortingParameter}
+            >
+              <option value="preco">p</option>
             </select>
-          </label>
+
+            <select
+              name="ordem"
+              value={this.state.ordem}
+              onchange={this.updateOrdem}
+            >
+              <option value={1}>Crescente</option>
+              <option value={-1}>Decrescente</option>
+            </select>
+          </span>
         </EstilizandoTopo>
         <EstilizandoProdutos>
-            <Cards card={cards.filter(card => card.preco > this.state.filtroValorMinimo 
+            <Cards card={cards
+            .filter(card => card.preco > this.state.filtroValorMinimo 
               && card.preco < this.state.filtroValorMaximo 
-              && card.nome.toLowerCase().includes(this.state.filtroBuscaNome.toLowerCase()))}/>
+              && card.nome.toLowerCase().includes(this.state.filtroBuscaNome.toLowerCase()))
+            .sort((a,b) => {
+              switch (this.state.sortingParameter){
+                default:
+                  return this.state.ordem * (a.preco -b.preco)
+              }
+              
+            })
+          }/>
         </ EstilizandoProdutos> 
       </EstilizandoHome>
 
