@@ -4,6 +4,10 @@ import Cards from './components/Cards';
 
 import styled, { createGlobalStyle } from 'styled-components'
 
+import Carrinho from './components/Carrinho/Carrinho';
+
+
+
 import Sputnik from './components/imgs/sputnik.jpg'
 import Vostok1 from './components/imgs/vostok1.jpg'
 import Explorer1 from './components/imgs/explorer1.jpg'
@@ -18,10 +22,9 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const EstilizacaoPagina = styled.div`
- display: grid;
- grid-template-columns: 300px 1fr 300px;
- grid-template-rows: 1fr;
- 
+  display: grid;
+  grid-template-columns: 300px 1fr 300px;
+  grid-template-rows: 1fr;
 `
 
 const EstilizacaoFiltros = styled.div`
@@ -105,8 +108,24 @@ const LabelFiltros = styled.label `
     `
 
 class App extends React.Component {
+  state = {
+    filtroValorMinimo: 0,
+    filtroValorMaximo: 500,
+    filtroBuscaNome: ""  
+  }
 
- render() {
+  onChangeMinimo = (event) => {
+    this.setState({filtroValorMinimo: event.target.value})
+  }
+  onChangeMaximo = (event) => {
+    this.setState({filtroValorMaximo: event.target.value})
+  }
+  onChangeNome = (event) => {
+    this.setState({filtroBuscaNome: event.target.value})
+  }
+
+  render() {
+
 
   return (
     <EstilizacaoPagina>
@@ -120,22 +139,32 @@ class App extends React.Component {
           <FormFiltros>
 
             <LabelFiltros>
-               Valor Mínimo:
-              <input type="number" name="valor-minimo" />
+              Valor Mínimo:
+              <input type="number" name="valor-minimo" 
+              value={this.state.filtroValorMinimo} 
+              onChange={this.onChangeMinimo} />
             </LabelFiltros>
       
             <LabelFiltros>
               Valor Máximo:
-              <input type="number" name="valor-maximo" />
+              <input type="number" name="valor-maximo" 
+              value={this.state.filtroValorMaximo} 
+              onChange={this.onChangeMaximo} />
             </LabelFiltros>
         
             <LabelFiltros>
-             Buscar por Nome:
-             <input type="text" name="busca-por-nome" />
+
+             
+
+              Buscar por Nome:
+              <input type="text" name="busca-por-nome" 
+              value={this.state.filtroBuscaNome} 
+              onChange={this.onChangeNome} />
+
             </LabelFiltros>
 
           </FormFiltros>
-         </DivFiltros>
+          </DivFiltros>
       </EstilizacaoFiltros>
 
      {/* {HOME} */}
@@ -153,7 +182,9 @@ class App extends React.Component {
           </label>
         </EstilizandoTopo>
         <EstilizandoProdutos>
-            <Cards card={cards}/>
+            <Cards card={cards.filter(card => card.preco > this.state.filtroValorMinimo 
+              && card.preco < this.state.filtroValorMaximo 
+              && card.nome.toLowerCase().includes(this.state.filtroBuscaNome.toLowerCase()))}/>
         </ EstilizandoProdutos> 
       </EstilizandoHome>
 
@@ -161,7 +192,7 @@ class App extends React.Component {
       {/* {CARRINHO} */}
 
       <EstilizandoCarrinho>
-        <p>Carrinho</p>
+        <Carrinho></Carrinho>
       </EstilizandoCarrinho>
 
 
