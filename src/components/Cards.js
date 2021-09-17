@@ -4,15 +4,17 @@ import CadaCard from './CadaCard';
 
 
 
-const Cards = (props) =>{
+class Cards extends React.Component{
+    render(){
     return(
         < >
-            {props.card.map(card => (
+            {this.props.card.map(card => (
             <div key={card.id}>
                 <CadaCard nome={card.nome} imagem={card.imagem} preco={card.preco}/>
             </div>))}
         </>
     )
+ }
 }
 
 export default Cards;

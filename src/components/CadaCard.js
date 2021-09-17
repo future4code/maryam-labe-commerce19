@@ -11,15 +11,17 @@ const EnvolvendoCard = styled.div`
  align-items: center;
  padding-bottom: 10px;
 `
-const CadaCard = (props) =>{
+class CadaCard extends React.Component{
+    render(){
     return(
         <EnvolvendoCard>
-             <img src={props.imagem} alt="" />
-             <h4>{props.nome}</h4>
-             <p>R${props.preco}</p>
+             <img src={this.props.imagem} alt="" />
+             <h4>{this.props.nome}</h4>
+             <p>R${this.props.preco}</p>
              <button>Adicionar ao Carrinho</button>
         </EnvolvendoCard>
     )
+    }
 }
 
 export default CadaCard;

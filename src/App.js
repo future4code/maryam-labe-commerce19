@@ -29,14 +29,14 @@ grid-template-rows: 60px 1fr;
 `
 
 const EstilizandoProdutos = styled.div`
-border: 3px solid green;
+
 display: grid;
 grid-template-columns: 1fr 1fr;
 grid-template-rows: 1fr 1fr;
 gap: 10px;
 `
 const EstilizandoTopo = styled.div`
-border: 2px solid orange;
+border: 1px solid black;
 display: flex;
 justify-content: space-between;
 align-items: center;
@@ -91,18 +91,19 @@ const LabelFiltros = styled.label `
     margin-bottom: 10px;
     `
 
-const App = () => {
+class App extends React.Component {
 
- 
+ render() {
 
   return (
     <EstilizacaoPagina>
+
+     {/* {Filtros} */}
       <EstilizacaoFiltros>
         <DivFiltros>
-      
           <h3>Filtros</h3>
-      
           <FormFiltros>
+
             <LabelFiltros>
                Valor Mínimo:
               <input type="number" name="valor-minimo" />
@@ -117,11 +118,13 @@ const App = () => {
              Buscar por Nome:
              <input type="text" name="busca-por-nome" />
            </LabelFiltros>
-         </FormFiltros>
-    
-    
+
+          </FormFiltros>
          </DivFiltros>
       </EstilizacaoFiltros>
+
+     {/* {HOME} */}
+
       <EstilizandoHome>
         <EstilizandoTopo>
           
@@ -136,14 +139,18 @@ const App = () => {
         </EstilizandoTopo>
         <EstilizandoProdutos>
             <Cards card={cards}/>
-        </ EstilizandoProdutos>
-        
+        </ EstilizandoProdutos> 
       </EstilizandoHome>
+
+
+      {/* {CARRINHO} */}
+
       <EstilizandoCarrinho>
         <p>Carrinho</p>
       </EstilizandoCarrinho>
     </EstilizacaoPagina>
   );
+  };
 }
 
 export default App;
