@@ -1,26 +1,242 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import Cards from './components/Cards';
+
+import styled, { createGlobalStyle } from 'styled-components'
+
+import Carrinho from './components/Carrinho/Carrinho';
+
+
+
+import Sputnik from './components/imgs/sputnik.jpg'
+import Vostok1 from './components/imgs/vostok1.jpg'
+import Explorer1 from './components/imgs/explorer1.jpg'
+import Luna10 from './components/imgs/luna10.jpg'
+
+const GlobalStyle = createGlobalStyle`
+ *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+`
+
+const EstilizacaoPagina = styled.div`
+  display: grid;
+  grid-template-columns: 300px 1fr 300px;
+  grid-template-rows: 1fr;
+`
+
+const EstilizacaoFiltros = styled.div`
+/* border: 1px solid blue; */
+`
+const EstilizandoCarrinho = styled.div`
+/* border: 1px solid blue; */
+`
+
+// HOME ESTILIZAÇÃO
+const EstilizandoHome = styled.section`
+/* border: 1px solid black; */
+/* width: 100vh; */
+display:grid;
+grid-template-rows: 60px 1fr;
+`
+
+const EstilizandoProdutos = styled.div`
+justify-items: center;
+display: grid;
+grid-template-columns: 1fr 1fr;
+grid-template-rows: 1fr 1fr;
+gap: 10px;
+`
+const EstilizandoTopo = styled.div`
+width: 100%;
+border: 1px solid black;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding-left: 10px;
+padding-right: 10px;
+margin-top: 30px;
+`
+//HOME ESTILIZAÇÃO
+const cards = [
+  {
+      id: 1,
+      nome: 'Sputnik',
+      preco: 230,
+      imagem: Sputnik
+  },
+  {
+      id: 2,
+      nome: 'Vostok 1',
+      preco: 20,
+      imagem:Vostok1
+  },
+  {
+      id: 3,
+      nome: 'Explorer 1',
+      preco: 35,
+      imagem: Explorer1
+  },
+  {
+      id: 4,
+      nome: 'Luna 10',
+      preco: 100,
+      imagem: Luna10
+  },
+]
+
+
+const DivFiltros = styled.div `
+  border: 1px black solid;
+  margin: 30px;
+  padding-left: 10px;
+  padding-bottom: 90vh;
+  
+`
+const FormFiltros = styled.form `
+  display: flex;
+  flex-direction: column;
+`
+
+const LabelFiltros = styled.label `
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    `
+
+class App extends React.Component {
+  state = {
+    filtroValorMinimo: 0,
+    filtroValorMaximo: 500,
+    filtroBuscaNome: "",
+    sortingParameter: "preco",
+    ordem:1,
+    produtosSelecionados: []
+  }
+
+  onChangeMinimo = (event) => {
+    this.setState({filtroValorMinimo: event.target.value})
+  }
+  onChangeMaximo = (event) => {
+    this.setState({filtroValorMaximo: event.target.value})
+  }
+  onChangeNome = (event) => {
+    this.setState({filtroBuscaNome: event.target.value})
+  }
+  
+  updatesortingParameter =(event) => {
+    this.setState({
+      sortingParameter: event.target.value
+    }
+    )
+  }
+
+  updateOrdem =(event) => {
+    this.setState({
+      ordem: event.target.value
+    }
+    )
+  }
+  render() {
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <EstilizacaoPagina>
+      <GlobalStyle/>
+
+
+     {/* {Filtros} */}
+      <EstilizacaoFiltros>
+        <DivFiltros>
+          <h3>Filtros</h3>
+          <FormFiltros>
+
+            <LabelFiltros>
+              Valor Mínimo:
+              <input type="number" name="valor-minimo" 
+              value={this.state.filtroValorMinimo} 
+              onChange={this.onChangeMinimo} />
+            </LabelFiltros>
+      
+            <LabelFiltros>
+              Valor Máximo:
+              <input type="number" name="valor-maximo" 
+              value={this.state.filtroValorMaximo} 
+              onChange={this.onChangeMaximo} />
+            </LabelFiltros>
+        
+            <LabelFiltros>
+
+             
+
+              Buscar por Nome:
+              <input type="text" name="busca-por-nome" 
+              value={this.state.filtroBuscaNome} 
+              onChange={this.onChangeNome} />
+
+            </LabelFiltros>
+
+          </FormFiltros>
+          </DivFiltros>
+      </EstilizacaoFiltros>
+
+     {/* {HOME} */}
+
+      <EstilizandoHome>
+        <EstilizandoTopo>
+          
+          <p>Quantidade:{cards.length}</p>
+          <span>
+            <label for="sort">Ordenação: </label>
+            <select
+              name="sort"
+              value={this.state.sortingParameter}
+              onchange={this.updatesortingParameter}
+            >
+              <option value="preco">p</option>
+            </select>
+
+            <select
+              name="ordem"
+              value={this.state.ordem}
+              onchange={this.updateOrdem}
+            >
+              <option value={1}>Crescente</option>
+              <option value={-1}>Decrescente</option>
+            </select>
+          </span>
+        </EstilizandoTopo>
+        <EstilizandoProdutos>
+            <Cards card={cards
+            .filter(card => card.preco > this.state.filtroValorMinimo 
+              && card.preco < this.state.filtroValorMaximo 
+              && card.nome.toLowerCase().includes(this.state.filtroBuscaNome.toLowerCase()))
+            .sort((a,b) => {
+              switch (this.state.sortingParameter){
+                default:
+                  return this.state.ordem * (a.preco -b.preco)
+              }
+              
+            })
+          }/>
+        </ EstilizandoProdutos> 
+      </EstilizandoHome>
+
+
+      {/* {CARRINHO} */}
+
+      <EstilizandoCarrinho>
+        <Carrinho></Carrinho>
+      </EstilizandoCarrinho>
+
+
+
+    </EstilizacaoPagina>
   );
+  };
 }
 
 export default App;
